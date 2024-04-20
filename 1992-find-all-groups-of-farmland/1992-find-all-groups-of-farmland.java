@@ -31,10 +31,20 @@ class Solution {
                 }
             }
         }
-        System.out.println(list);
+        
+        int ans[][] = new int[list.size()][4];
+        int i = 0;
+        for(int[] l : list){
+            ans[i][0] = l[0];
+            ans[i][1] = l[1];
+            ans[i][2] = l[2];
+            ans[i][3] = l[3];
+            i++;
+        }
         
         
-        return list.stream()
-                   .toArray(int[][]::new);
+        // return list.stream()
+        //            .toArray(int[][]::new);
+        return ans;
     }
 }
