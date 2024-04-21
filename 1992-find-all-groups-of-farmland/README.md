@@ -43,3 +43,86 @@ There are no groups of farmland.
 	<li>Groups of farmland are <strong>rectangular</strong> in shape.</li>
 </ul>
 </div>
+
+### Java
+```java
+class Solution {
+    int[] fill(int r, int c, int land[][])
+    {
+        int i = r;
+        while(i < land.length && land[i][c] == 1) i += 1;
+        int j = c;
+        while(j < land[0].length && land[r][j] == 1) j += 1;
+        for(int r1 = r; r1<i; r1++)
+        {
+            for(int c1 = c; c1<j; c1++)
+            {
+                land[r1][c1] = 2;
+            }
+        }
+        return new int[]{i-1, j-1};
+    }
+
+    public int[][] findFarmland(int[][] land) {
+        int r = land.length;
+        int c = land[0].length;
+
+        ArrayList<int[]> list = new ArrayList<>();
+        for(int i=0; i<r; i++)
+        {
+            for(int j=0; j<c; j++)
+            {
+                if(land[i][j] == 1)
+                {
+                    int[] temp = fill(i, j, land);
+                    list.add(new int[]{i, j, temp[0], temp[1]});
+                }
+            }
+        }
+        
+        int ans[][] = new int[list.size()][4];
+        int i = 0;
+        for(int[] l : list){
+            ans[i][0] = l[0];
+            ans[i][1] = l[1];
+            ans[i][2] = l[2];
+            ans[i][3] = l[3];
+            i++;
+        }
+        
+        
+        // return list.stream()
+        //            .toArray(int[][]::new);
+        return ans;
+    }
+}
+```
+
+## Python
+```python
+class Solution:
+    def fill(self, r, c, land):
+        i = r
+        while i < len(land) and land[i][c] == 1: i += 1
+        j = c
+        while j < len(land[0]) and land[r][j] == 1: j += 1
+        for r1 in range(r, i):
+            for c1 in range(c, j):
+                land[r1][c1] = 2
+        return [i-1, j-1]
+
+    def findFarmland(self, land: List[List[int]]) -> List[List[int]]:
+        i, j = 0, 0
+        r = len(land)
+        c = len(land[0])
+
+        ans = []
+        for i in range(r):
+            for j in range(c):
+                if land[i][j] == 1:
+                    temp = [i, j] + self.fill(i, j, land)
+                    # print(land)
+                    ans.append(temp)
+
+        return ans
+```
