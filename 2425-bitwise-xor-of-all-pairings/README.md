@@ -31,3 +31,15 @@ Thus, one possible nums3 array is [2,5,1,6].
 	<li><code>0 &lt;= nums1[i], nums2[j] &lt;= 10<sup>9</sup></code></li>
 </ul>
 </div>
+
+## Java
+```java
+class Solution {
+    public int xorAllNums(int[] nums1, int[] nums2) {
+        int ans = 0;
+        if(nums2.length%2 == 1) for(int i : nums1) ans ^= i;       
+        if(nums1.length%2 == 1) for(int i : nums2) ans ^= i;
+        return ans;
+    }
+}
+```
