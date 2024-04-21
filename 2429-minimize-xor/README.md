@@ -37,3 +37,57 @@ The integer <strong>3</strong> has the same number of set bits as num2, and the 
 	<li><code>1 &lt;= num1, num2 &lt;= 10<sup>9</sup></code></li>
 </ul>
 </div>
+
+## Java
+```java
+class Solution {
+    public int minimizeXor(int num1, int num2) {
+        int n = Integer.bitCount(num2);
+        int p = Integer.bitCount(num1);
+        if(n == p) return num1;
+        
+        n -= p;
+        int x = num1;
+        int c = 1;
+        while(n!=0)
+        {
+            if(n>0 && (x&c) == 0) {
+                x |= c;
+                n--;
+            }
+            else if(n<0 && (x&c) != 0) {
+                x ^= c;
+                n++;
+            }
+            c= c << 1;
+        }
+        return x;
+    }
+}
+```
+
+
+## Python
+```python
+class Solution:
+    def minimizeXor(self, num1: int, num2: int) -> int:
+        n = num2.bit_count()
+        p = num1.bit_count()
+        if n == p: return num1
+        
+        n -= p
+        x = num1
+        c = 1
+        while n!=0:
+            if n>0 and (x&c) == 0: 
+                x |= c
+                n -= 1
+                
+            elif n<0 and (x&c) != 0: 
+                x ^= c
+                n += 1
+                
+            c= c << 1
+
+        return x
+```
