@@ -51,3 +51,36 @@ derived[1] = original[1] ⊕ original[0] = 1
 	<li>The values in <code>derived</code>&nbsp;are either <strong>0's</strong> or <strong>1's</strong></li>
 </ul>
 </div>
+
+## Java
+```java
+class Solution {
+    public boolean doesValidArrayExist(int[] derived) {
+        int x = 0;
+        int y = 1;
+        for(int i=0; i<derived.length-1; i++)
+        {
+            x ^= derived[i];
+            y ^= derived[i];
+        }
+        if((x^0) == derived[derived.length-1]) return true;
+        if((y^1) == derived[derived.length-1]) return true;
+        return false;
+    }
+}
+```
+
+## Python
+```python
+class Solution:
+    def doesValidArrayExist(self, derived: List[int]) -> bool:
+        x = 0
+        y = 1
+        for i in range(len(derived)-1):
+            x ^= derived[i]
+            y ^= derived[i]
+        
+        if (x^0) == derived[-1]: return True
+        if (y^1) == derived[-1]: return True
+        return False
+```
