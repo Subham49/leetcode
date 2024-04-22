@@ -28,3 +28,21 @@
 	<li><code>-2<sup>31</sup> &lt;= x &lt;= 2<sup>31</sup> - 1</code></li>
 </ul>
 </div>
+
+## Java
+```java
+class Solution {
+    public int reverse(int x) {
+        boolean sign = x>=0;
+        
+        StringBuilder str = new StringBuilder(Math.abs(x)+"");
+        str.reverse();
+        try{
+            return sign ? Integer.valueOf(str.toString()) : -Integer.valueOf(str.toString());
+        }
+        catch(Exception e){
+            return 0;
+        }
+    }
+}
+```
