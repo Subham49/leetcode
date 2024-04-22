@@ -1,5 +1,7 @@
 # Python & JAVA Solutions for Leetcode 
+Take a look at my profile : [Subham001](https://leetcode.com/Subham001/)
 
+![](https://leetcard.jacoblin.cool/Subham001?ext=heatmap)
 ## Problems & Solutions
 
 | Q.No. | Title | Solution | Basic logic |
