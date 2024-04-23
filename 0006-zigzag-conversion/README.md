@@ -45,3 +45,80 @@ P     I
 	<li><code>1 &lt;= numRows &lt;= 1000</code></li>
 </ul>
 </div>
+
+## Java
+```java
+class Solution {
+    public String convert(String s, int numRows) {
+        if(numRows==1)
+            return s;
+        ArrayList<ArrayList<Character>> list = new ArrayList<>();
+        for(int i=0; i<numRows; i++)
+        {
+            list.add(new ArrayList<>());
+        }
+        int i=0, k=0;
+        boolean flag = true;
+        while(i<s.length())
+        {
+            if(flag)
+            {
+                while(i<s.length() && k<numRows)
+                {
+                    list.get(k).add(s.charAt(i++));
+                    k++;
+                }
+                k = numRows-2;
+            }
+            else{
+                while(i<s.length() && k>=0)
+                {
+                    list.get(k).add(s.charAt(i++));
+                    k--;
+                }
+                k = 1;
+            }
+            flag = !flag;
+        }
+        StringBuilder ans = new StringBuilder();
+        for(ArrayList<Character> str : list)
+        {
+            for(Character ch : str)
+            {
+                ans.append(ch);
+            }
+        }
+        return ans.toString();
+    }
+}
+```
+
+## Python
+```python
+class Solution:
+    def convert(self, s: str, numRows: int) -> str:
+        if numRows == 1:
+            return s
+
+        lists = [[] for _ in range(numRows)]
+        i, k = 0, 0
+        flag = True
+
+        while i < len(s):
+            if flag:
+                while i < len(s) and k < numRows:
+                    lists[k].append(s[i])
+                    i += 1
+                    k += 1
+                k = numRows - 2
+            else:
+                while i < len(s) and k >= 0:
+                    lists[k].append(s[i])
+                    i += 1
+                    k -= 1
+                k = 1
+            flag = not flag
+
+        ans = ''.join([''.join(row) for row in lists])
+        return ans
+```
