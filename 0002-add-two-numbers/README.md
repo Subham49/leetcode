@@ -31,3 +31,75 @@
 	<li>It is guaranteed that the list represents a number that does not have leading zeros.</li>
 </ul>
 </div>
+
+## Java
+```java
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
+class Solution {
+    public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
+        ListNode dummy = new ListNode(0);
+        ListNode curr = dummy;
+        int carry = 0;
+
+        while (l1 != null || l2 != null || carry > 0) {
+            int sumValue = carry;
+
+            if (l1 != null) {
+                sumValue += l1.val;
+                l1 = l1.next;
+            }
+
+            if (l2 != null) {
+                sumValue += l2.val;
+                l2 = l2.next;
+            }
+
+            carry = sumValue / 10;
+            curr.next = new ListNode(sumValue % 10);
+            curr = curr.next;
+        }
+
+        return dummy.next;
+    }
+}
+```
+
+## Python
+```
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+class Solution:
+    def addTwoNumbers(self, l1: Optional[ListNode], l2: Optional[ListNode]) -> Optional[ListNode]:
+        dummy = ListNode(0)
+        curr = dummy
+        carry = 0
+        
+        while l1 or l2 or carry:
+            sum_value = carry
+            
+            if l1:
+                sum_value += l1.val
+                l1 = l1.next
+                
+            if l2:
+                sum_value += l2.val
+                l2 = l2.next
+            
+            carry = sum_value // 10
+            curr.next = ListNode(sum_value % 10)
+            curr = curr.next
+        
+        return dummy.next
+```
