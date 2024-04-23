@@ -9,53 +9,29 @@
  * }
  */
 class Solution {
-    public ListNode reverse(ListNode head) {
-        ListNode c=head, p=null, n=null;
-        while(c!=null)
-        {
-            n=c.next;
-            c.next=p;
-            p=c;
-            c=n;
-        }
-        return p;
-    }
     public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
-        ListNode a = l1;
-        ListNode b = l2;
-        
-        ListNode c = new ListNode(-1);
-        ListNode curr = c;
-        while(a!=null || b!=null)
-        {
-            int f = 0;
-            if(a!=null){
-                f = a.val;
-                a = a.next;
-            }
-            int s = 0;
-            if(b!=null){
-                s = b.val;
-                b = b.next;
-            }
-            curr.next = new ListNode(f+s);
-            curr = curr.next;
-        }
-        
-        curr = c.next;
+        ListNode dummy = new ListNode(0);
+        ListNode curr = dummy;
         int carry = 0;
-        while(curr!=null)
-        {
-            int temp = (carry+curr.val)/10;
-            curr.val = (carry+curr.val)%10;
-            carry = temp;
-            if(curr.next == null && carry!=0)
-            {
-                curr.next = new ListNode(carry);
-                break;
+
+        while (l1 != null || l2 != null || carry > 0) {
+            int sumValue = carry;
+
+            if (l1 != null) {
+                sumValue += l1.val;
+                l1 = l1.next;
             }
+
+            if (l2 != null) {
+                sumValue += l2.val;
+                l2 = l2.next;
+            }
+
+            carry = sumValue / 10;
+            curr.next = new ListNode(sumValue % 10);
             curr = curr.next;
         }
-        return c.next;
+
+        return dummy.next;
     }
 }
