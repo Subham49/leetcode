@@ -27,3 +27,43 @@ T_4 = 1 + 1 + 2 = 4
 	<li><code>0 &lt;= n &lt;= 37</code></li>
 	<li>The answer is guaranteed to fit within a 32-bit integer, ie. <code>answer &lt;= 2^31 - 1</code>.</li>
 </ul></div>
+
+## Java
+
+```java
+class Solution {
+    public int tribonacci(int n) {
+        if(n == 0)  return 0;
+        if(n == 1 || n == 2)  return 1;
+        int a = 0, b=1, c=1;
+        for(int i=3; i<=n; i++)
+        {
+            int d = a+b+c;
+            a=b;
+            b=c;
+            c=d;
+        }
+        return c;
+    }
+}
+```
+
+## Python
+
+```python
+class Solution:
+    def tribonacci(self, n: int) -> int:
+        if n == 0:  return 0
+        if n == 1 or n == 2:  return 1
+        a = 0 
+        b=1
+        c=1
+        for i in range(3, n+1): 
+            d = a+b+c
+            a=b
+            b=c
+            c=d
+        
+        return c
+```
+
