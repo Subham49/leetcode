@@ -66,9 +66,61 @@ Since 4193 is in the range [-2<sup>31</sup>, 2<sup>31</sup> - 1], the final resu
 
 <p>&nbsp;</p>
 <p><strong>Constraints:</strong></p>
-
 <ul>
 	<li><code>0 &lt;= s.length &lt;= 200</code></li>
 	<li><code>s</code> consists of English letters (lower-case and upper-case), digits (<code>0-9</code>), <code>' '</code>, <code>'+'</code>, <code>'-'</code>, and <code>'.'</code>.</li>
 </ul>
 </div>
+
+## Java
+
+```java
+class Solution {
+    public int myAtoi(String s) {
+        s = s.trim();
+        if(s.length() == 0) return 0;
+        boolean pos = s.charAt(0) == '+';        
+        boolean neg = s.charAt(0) == '-';
+
+        int ind = pos||neg?1:0;
+        long ans = 0;
+        for(;ind<s.length();ind++)
+        {
+            char ch = s.charAt(ind);
+            if(ch<'0' || ch>'9') break;
+            if (ans > Integer.MAX_VALUE / 10 || (ans == Integer.MAX_VALUE / 10 && (ch-'0') > Integer.MAX_VALUE % 10)) {
+                return neg ? Integer.MIN_VALUE : Integer.MAX_VALUE;
+            }          
+            ans = ans*10 + (ch-'0');
+        }
+        return neg?-1*(int)ans:(int)ans;
+    }
+}
+```
+
+## Python
+
+```python
+class Solution:
+    def myAtoi(self, s: str) -> int:
+        s = s.strip()
+        if not s: return 0
+        pos = s[0] == '+'       
+        neg = s[0] == '-'
+
+        ind = 1 if pos or neg else 0
+        ans = 0
+        
+        while ind<len(s):
+
+            if s[ind]<'0' or s[ind]>'9': break;
+            
+            if ans > (2**31-1) // 10 or (ans == (2**31-1) // 10 and int(s[ind]) > (2**31-1) % 10): 
+                return -2**31 if neg else 2**31-1
+            
+            ans = ans*10 + int(s[ind])
+            ind += 1
+        
+        return -ans if neg else ans
+```
+
