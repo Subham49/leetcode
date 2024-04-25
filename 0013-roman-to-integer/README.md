@@ -52,3 +52,62 @@ M             1000</pre>
 	<li>It is <strong>guaranteed</strong>&nbsp;that <code>s</code> is a valid roman numeral in the range <code>[1, 3999]</code>.</li>
 </ul>
 </div>
+
+## Java
+
+```java
+class Solution {
+    public int romanToInt(String s) {
+        Map<Character, Integer> map = Map.of(
+            'I', 1,
+            'V', 5,
+            'X', 10,
+            'L', 50,
+            'C', 100,
+            'D', 500,
+            'M', 1000
+        );
+        
+        int ans = 0;
+        for(int i=0; i<s.length()-1; i++)
+        {
+            char curr = s.charAt(i);
+            char next = s.charAt(i+1);
+            if(map.get(curr) < map.get(next))
+                ans -= map.get(curr);
+            else
+                ans += map.get(curr);
+        }
+        ans += map.get(s.charAt(s.length()-1));
+        return ans;
+    }
+}
+```
+
+## Python
+
+```python
+class Solution:
+    def romanToInt(self, s: str) -> int:
+        mydict = {
+            'I': 1,
+            'V': 5,
+            'X': 10,
+            'L': 50,
+            'C': 100,
+            'D': 500,
+            'M': 1000
+        }
+        
+        ans = 0
+        for i in range(len(s)-1):
+            curr = s[i]
+            nextc = s[i+1]
+            if mydict[curr] < mydict[nextc]:
+                ans -= mydict[curr]
+            else:
+                ans += mydict[curr]
+        
+        ans += mydict[s[-1]];
+        return ans
+```
