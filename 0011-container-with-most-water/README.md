@@ -29,3 +29,41 @@
 	<li><code>0 &lt;= height[i] &lt;= 10<sup>4</sup></code></li>
 </ul>
 </div>
+
+## Java
+
+```java
+class Solution {
+    public int maxArea(int[] height) {
+        int l=0, r=height.length-1;
+        int ans = 0;
+        while(l<r)
+        {
+            ans = Math.max(ans, Math.min(height[l], height[r])*(r-l));
+            if(height[l]<height[r])
+                l++;
+            else
+                r--;
+        }
+        return ans;
+    }
+}
+```
+
+## Python
+
+```python
+class Solution:
+    def maxArea(self, height: List[int]) -> int:
+        l=0
+        r=len(height)-1
+        ans = 0
+        while l<r:
+            ans = max(ans, min(height[l], height[r])*(r-l))
+            if height[l]<height[r]:
+                l+=1
+            else:
+                r-=1
+        
+        return ans
+```
