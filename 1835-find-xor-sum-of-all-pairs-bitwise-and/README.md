@@ -34,3 +34,29 @@ The XOR sum = 0 XOR 1 XOR 2 XOR 0 XOR 2 XOR 1 = 0.
 	<li><code>0 &lt;= arr1[i], arr2[j] &lt;= 10<sup>9</sup></code></li>
 </ul>
 </div>
+
+## Java
+
+```java
+class Solution {
+    public int getXORSum(int[] arr1, int[] arr2) {
+        int xorArr2 = 0;
+        for(int i : arr2) xorArr2 ^= i;
+        int xorArr1 = 0;
+        for(int j : arr1) xorArr1 ^= j;
+        return xorArr2 & xorArr1;
+    }
+}
+```
+
+## Python
+
+```python
+class Solution:
+    def getXORSum(self, arr1: List[int], arr2: List[int]) -> int:
+        xorArr2 = 0;
+        for i in arr2: xorArr2 ^= i
+        xorArr1 = 0
+        for j in arr1: xorArr1 ^= j
+        return xorArr2 & xorArr1
+```
