@@ -31,3 +31,36 @@
 
 <p>&nbsp;</p>
 <strong>Follow up:</strong> Could you solve it without converting the integer to a string?</div>
+
+## Java
+
+```java
+class Solution {
+    public boolean isPalindrome(int x) {
+        if(x<0) return false;
+        int n = x;
+        int r = 0;
+        while(x!=0)
+        {
+            r = r*10 + x%10;
+            x /= 10;
+        }
+        return r == n;
+    }
+}
+```
+
+## Python
+
+```python
+class Solution:
+    def isPalindrome(self, x: int) -> bool:
+        if x<0: return False
+        n = x
+        r = 0
+        while x!=0:
+            r = r*10 + x%10
+            x = x//10
+        
+        return r == n
+```
