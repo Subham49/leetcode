@@ -1,4 +1,12 @@
 # Python & JAVA Solutions for Leetcode 
+
+
+<p align="center">
+  <img src="https://img.shields.io/badge/LeetCode-000000?style=for-the-badge&logo=LeetCode&logoColor=#d16c06" alt="LeetCode">
+  <img src="https://img.shields.io/badge/java-%23ED8B00.svg?style=for-the-badge&logo=openjdk&logoColor=white" alt="Java">
+  <img src="https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54" alt="Python">
+</p>
+
 Take a look at my profile : [Subham001](https://leetcode.com/Subham001/)
 
 ![](https://leetcard.jacoblin.cool/Subham001?ext=heatmap)
