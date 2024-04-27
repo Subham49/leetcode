@@ -38,3 +38,61 @@ So the final output is 4.
 	<li>It is guaranteed that <code>key</code> could always be spelled by rotating <code>ring</code>.</li>
 </ul>
 </div>
+
+## Java
+
+```java
+class Solution {
+    Integer dp[][];
+    int fun(int ri, int ki, String r, String k)
+    {
+        if(ki == k.length()) return 0;
+        
+        if(dp[ri][ki] != null) return dp[ri][ki];
+        
+        int ans = Integer.MAX_VALUE;
+        
+        for(int i=0; i<r.length(); i++)
+        {
+            if(r.charAt(i) == k.charAt(ki)){
+                int count = Math.min(Math.abs(ri-i), r.length() - Math.abs(ri-i));
+                ans = Math.min(ans, count + fun(i, ki+1, r, k));
+            }
+        }
+        return dp[ri][ki] = ans;
+    }
+    public int findRotateSteps(String ring, String key) {
+        dp = new Integer[ring.length()][key.length()];
+        return key.length() + fun(0, 0, ring, key);
+    }
+    
+}
+```
+
+## Python
+
+```python
+class Solution:
+    def __init__(self):
+        self.dp = None
+        
+    def fun(self, ri, ki, r, k):
+        if ki == len(k): return 0
+        
+        if self.dp[ri][ki] != -1: return self.dp[ri][ki]
+        
+        ans = 2**31-1
+        
+        for i in range(len(r)):
+            if r[i] == k[ki]:
+                count = min(abs(ri-i), len(r) - abs(ri-i))
+                ans = min(ans, count + self.fun(i, ki+1, r, k))
+            
+        
+        self.dp[ri][ki] = ans
+        return ans
+    
+    def findRotateSteps(self, ring: str, key: str) -> int:
+        self.dp = [[-1]*len(key) for _ in range(len(ring))]
+        return len(key) + self.fun(0, 0, ring, key)
+```
