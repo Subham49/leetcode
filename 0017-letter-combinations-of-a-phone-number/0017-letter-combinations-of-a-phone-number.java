@@ -1,40 +1,23 @@
 class Solution {
-    List<String> fun(String s, int i, char a[][])
+    String[] key = new String[] {"", "", "abc", "def", "ghi", "jkl", "mno", "pqrs", "tuv", "wxyz"};
+
+
+    List<String> fun(int ind, String str)
     {
-        if(i == s.length())
-        {
-            List<String> ans = new ArrayList<>();
-            ans.add("");
-            return ans;
-        }
-        List<String> temp = fun(s, i+1, a);
+        if(ind == str.length()) return new ArrayList<>(Arrays.asList(""));
+
+        List<String> l = fun(ind+1, str);
+        int ch = str.charAt(ind) - '0';
         List<String> ans = new ArrayList<>();
-        int x = s.charAt(i)-'0';
-        for(int j=0; j<a[x].length; j++)
-        {
-            char ch = a[x][j];
-            for(int k=0; k<temp.size(); k++)
-            {
-                ans.add(ch+temp.get(k));
+        for(char c : key[ch].toCharArray()){
+            for(String s : l){
+                ans.add(c+s);
             }
         }
         return ans;
     }
     public List<String> letterCombinations(String digits) {
-        char a[][] = {
-            {},
-            {},
-            {'a','b','c'},
-            {'d','e','f'},
-            {'g','h','i'},
-            {'j','k','l'},
-            {'m','n','o'},
-            {'p','q','r','s'},
-            {'t','u','v'},
-            {'w','x','y','z'}
-            };
-        if(digits.length() == 0)
-            return new ArrayList<>();
-        return fun(digits, 0, a);
+        if(digits.equals("")) return new ArrayList<>();
+        return fun(0, digits);
     }
 }
