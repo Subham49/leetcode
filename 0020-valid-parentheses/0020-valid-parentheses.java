@@ -1,30 +1,21 @@
 class Solution {
-    boolean match(char a, char b)
-    {
-        if(b == '(' && a == ')')
-            return true;
-        else if(b == '[' && a == ']')
-            return true;
-        else if(b == '{' && a == '}')
-            return true;
-        return false;
-    }
     public boolean isValid(String s) {
-        ArrayDeque<Character> S = new ArrayDeque<>();
-        for(int i=0; i<s.length(); i++)
+        ArrayDeque<Character> stack = new ArrayDeque<>();
+        for(char ch : s.toCharArray())
         {
-            char ch = s.charAt(i);
-            if(ch == '(' || ch == '{' || ch == '[')
-                S.push(ch);
+            if("({[".indexOf(ch) != -1) stack.push(ch);
             else{
-                if(S.isEmpty() || !match(ch, S.peek()))
+                if(stack.isEmpty()) return false;
+                if(
+                    !(stack.peek() == '(' && ch == ')') && 
+                    !(stack.peek() == '[' && ch == ']') && 
+                    !(stack.peek() == '{' && ch == '}')
+                )
                     return false;
-                else
-                    S.pop();;
+                stack.pop();
             }
         }
-        if(S.isEmpty())
-            return true;
-        return false;
+        System.out.println(stack);
+        return stack.isEmpty();
     }
 }
