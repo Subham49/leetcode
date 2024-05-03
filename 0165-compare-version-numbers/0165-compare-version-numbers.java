@@ -4,8 +4,6 @@ class Solution {
         String[] b = version2.split("\\.");
         int i=0, j=0;
 
-        
-
         int n = a.length;
         int m = b.length;
         while(i<n && j<m)
