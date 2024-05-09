@@ -29,3 +29,68 @@
 	<li>The number of nodes in the&nbsp;list&nbsp;is in the range <code>[0, 100]</code>.</li>
 	<li><code>0 &lt;= Node.val &lt;= 100</code></li>
 </ul>
+
+## Java
+```java
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
+class Solution {
+    public ListNode swapPairs(ListNode head) {
+        ListNode i=head, j;
+        if(head == null || head.next == null)
+            return head;
+        j=head.next;
+        head=j;
+        while(true)
+        {
+            ListNode t=j.next;
+            j.next=i;
+            if (t == null || t.next == null) {
+                i.next = t;
+                break;
+            }
+            i.next=t.next;
+            i=t;
+            j=i.next;
+        }
+        return head;
+    }
+}
+```
+
+## Python
+```python
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+class Solution:
+    def swapPairs(self, head: Optional[ListNode]) -> Optional[ListNode]:
+        i=head
+
+        if head == None or head.next == None: return head
+        j=head.next
+
+        head=j
+        while True:
+            t=j.next
+            j.next=i
+            if t == None or t.next == None: 
+                i.next = t
+                break
+            
+            i.next=t.next
+            i=t
+            j=i.next
+        
+        return head
+```
