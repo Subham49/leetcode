@@ -29,3 +29,59 @@
 	<li><code>-1000 &lt;= nums[i] &lt;= 1000</code></li>
 	<li><code>-10<sup>4</sup> &lt;= target &lt;= 10<sup>4</sup></code></li>
 </ul>
+
+## Java
+```java
+class Solution {
+    public int threeSumClosest(int[] nums, int target) {
+        int ans = Integer.MAX_VALUE;
+        int prev = Integer.MAX_VALUE;
+        Arrays.sort(nums);
+
+        for(int i=0; i<nums.length; i++)
+        {
+            if(i>0 && nums[i] == nums[i-1])
+                continue;
+            int lo = i+1;
+            int hi = nums.length-1;
+            while(lo<hi)
+            {
+                if(Math.abs(nums[i]+nums[lo]+nums[hi]-target)<prev)
+                {
+                    prev = Math.abs(nums[i]+nums[lo]+nums[hi]-target);
+                    ans = nums[i]+nums[lo]+nums[hi];
+                }
+                else if(nums[i]+nums[lo]+nums[hi]<target)
+                    lo++;
+                else 
+                    hi--;
+            }
+        }
+        return ans;
+    }
+}
+```
+## Python
+```python
+class Solution:
+    def threeSumClosest(self, nums: List[int], target: int) -> int:
+        nums.sort()
+        prev = 2**31-1
+        ans = 2**31-1
+
+        for i in range(len(nums)):
+
+            if i!=0 and nums[i] == nums[i-1]: continue
+
+            lo = i+1
+            hi = len(nums)-1
+
+            while lo<hi:
+                if abs(nums[i]+nums[lo]+nums[hi]-target) < prev:
+                    prev = abs(nums[i]+nums[lo]+nums[hi]-target)
+                    ans = nums[i]+nums[lo]+nums[hi]
+                elif nums[i]+nums[lo]+nums[hi]<target: lo += 1
+                else: hi -= 1
+
+        return ans
+```
