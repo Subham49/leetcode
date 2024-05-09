@@ -31,3 +31,52 @@
 	<li><code>0 &lt;= digits.length &lt;= 4</code></li>
 	<li><code>digits[i]</code> is a digit in the range <code>[&#39;2&#39;, &#39;9&#39;]</code>.</li>
 </ul>
+
+## Java
+```java
+class Solution {
+    String[] key = new String[] {"", "", "abc", "def", "ghi", "jkl", "mno", "pqrs", "tuv", "wxyz"};
+
+
+    List<String> fun(int ind, String str)
+    {
+        if(ind == str.length()) return new ArrayList<>(Arrays.asList(""));
+
+        List<String> l = fun(ind+1, str);
+        int ch = str.charAt(ind) - '0';
+        List<String> ans = new ArrayList<>();
+        for(char c : key[ch].toCharArray()){
+            for(String s : l){
+                ans.add(c+s);
+            }
+        }
+        return ans;
+    }
+    public List<String> letterCombinations(String digits) {
+        if(digits.equals("")) return new ArrayList<>();
+        return fun(0, digits);
+    }
+}
+```
+## Python
+```python
+class Solution:
+    key = ["", "", "abc", "def", "ghi", "jkl", "mno", "pqrs", "tuv", "wxyz"]
+
+    def fun(self, ind, string):
+        if ind == len(string):
+            return [""]
+
+        l = self.fun(ind + 1, string)
+        ch = int(string[ind])
+        ans = []
+        for c in self.key[ch]:
+            for s in l:
+                ans.append(c + s)
+        return ans
+
+    def letterCombinations(self, digits: str) -> List[str]:
+        if digits == "":
+            return []
+        return self.fun(0, digits)
+```
