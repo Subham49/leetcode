@@ -30,3 +30,71 @@
 
 <p>&nbsp;</p>
 <p><strong>Follow-up:</strong> Can you solve the problem in <code>O(1)</code> extra memory space?</p>
+
+## Java
+```java
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
+class Solution {
+    public ListNode reverseKGroup(ListNode head, int k) {
+        ListNode end = head;
+        for(int i=1; i<=k; i++)
+        {
+            if(end == null)
+                return head;
+            end = end.next;
+        }
+        ListNode c=head, p=null, n=null;
+        int count = 0;
+        while(c!=null && count<k)
+        {
+            n=c.next;
+            c.next=p;
+            p=c;
+            c=n;
+            count++;
+        }
+        if(end!=null)
+            head.next = reverseKGroup(end, k);
+        return p;
+        
+    }
+}
+```
+
+## Python
+```python
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+class Solution:
+    def reverseKGroup(self, head: Optional[ListNode], k: int) -> Optional[ListNode]:
+        end = head
+        for i in range(1, k+1):
+            if not end:
+                return head
+            end = end.next
+        
+        c, p, n = head, None, None
+        count = 0
+        while c and count < k:
+            n = c.next
+            c.next = p
+            p = c
+            c = n
+            count += 1
+        
+        if end:
+            head.next = self.reverseKGroup(end, k)
+        return p
+```
