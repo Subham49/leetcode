@@ -52,3 +52,36 @@ It does not matter what you leave beyond the returned k (hence they are undersco
 	<li><code>-100 &lt;= nums[i] &lt;= 100</code></li>
 	<li><code>nums</code> is sorted in <strong>non-decreasing</strong> order.</li>
 </ul>
+
+## Java
+```java
+class Solution {
+    public int removeDuplicates(int[] nums) {
+        if(nums.length<=1)
+            return nums.length;
+        int j=1;
+        for(int i=1;i<nums.length;i++)
+        {
+            if( nums[i] != nums[i-1] )
+                nums[j++]=nums[i];
+        }
+        return j;
+    }
+}
+```
+
+## Python
+```python
+class Solution:
+    def removeDuplicates(self, nums: List[int]) -> int:
+        if len(nums) <= 1:
+            return len(nums)
+        
+        j = 1
+        for i in range(1, len(nums)):
+            if nums[i] != nums[i - 1]:
+                nums[j] = nums[i]
+                j += 1
+        
+        return j
+```
