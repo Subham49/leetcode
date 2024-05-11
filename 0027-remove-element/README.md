@@ -56,3 +56,36 @@ It does not matter what you leave beyond the returned k (hence they are undersco
 	<li><code>0 &lt;= nums[i] &lt;= 50</code></li>
 	<li><code>0 &lt;= val &lt;= 100</code></li>
 </ul>
+
+## Java
+```java
+class Solution {
+    public int removeElement(int[] nums, int val) {
+        int i=0, j=0;
+        while(i<nums.length)
+        {
+            if(nums[i]!=val){
+                nums[j++]=nums[i];
+            }
+            i++;
+        }
+        return j;
+    }
+}
+```
+
+## Python
+```python
+class Solution:
+    def removeElement(self, nums: List[int], val: int) -> int:
+        i=0
+        j=0
+        while i<len(nums):
+            if nums[i]!=val:
+                nums[j]=nums[i]
+                j+=1
+            
+            i+=1
+        
+        return j
+```
