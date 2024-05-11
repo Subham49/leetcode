@@ -34,3 +34,63 @@
 
 <p>&nbsp;</p>
 <p><strong>Follow up:</strong> Could you do this in one pass?</p>
+
+## Java
+```java
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
+class Solution {
+    public ListNode removeNthFromEnd(ListNode head, int n) {
+        ListNode ptr=head, p=head, prev=null;
+        for(int i=1; i<n; i++)
+            ptr=ptr.next;
+        while(ptr.next!=null)
+        {
+            ptr=ptr.next;
+            prev=p;
+            p=p.next;
+        }
+        if(prev==null)
+            head=head.next;
+        else
+            prev.next=p.next;
+        return head;
+    }
+}
+```
+
+## Python
+```python
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+class Solution:
+    def removeNthFromEnd(self, head: Optional[ListNode], n: int) -> Optional[ListNode]:
+        prev = ListNode(-1)
+        curr = head
+        len = 0
+        while curr: 
+            len += 1
+            curr = curr.next
+
+        if n is len: return head.next
+        curr = head
+        for i in range(len-n):
+            prev = curr
+            curr = curr.next
+
+        if curr:
+            prev.next = curr.next
+        
+        return head
+```
