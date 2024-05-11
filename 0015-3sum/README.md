@@ -39,3 +39,65 @@ Notice that the order of the output and the order of the triplets does not matte
 	<li><code>3 &lt;= nums.length &lt;= 3000</code></li>
 	<li><code>-10<sup>5</sup> &lt;= nums[i] &lt;= 10<sup>5</sup></code></li>
 </ul>
+
+## Java
+```java
+class Solution {
+    public List<List<Integer>> threeSum(int[] nums) {
+        List<List<Integer>> ans = new ArrayList<>();
+        int n = nums.length;
+        Arrays.sort(nums);
+        for(int i=0; i<n; i++)
+        {
+            if(i!=0 && nums[i] == nums[i-1])
+                continue;
+            int j = i+1, k=n-1;
+            while(j<k)
+            {
+                int sum = nums[i] + nums[j] + nums[k];
+                if(sum == 0)
+                {
+                    List<Integer> list = new ArrayList<>();
+                    list.add(nums[i]);
+                    list.add(nums[j]);
+                    list.add(nums[k]);
+                    ans.add(list);
+                    j++;
+                    while(j<k && nums[j] == nums[j-1])
+                        j++;
+                }
+                else if(sum<0)
+                    j++;
+                else
+                    k--;
+            }
+        }
+        return ans;
+    }
+}
+```
+
+## Python
+```python
+class Solution:
+    def threeSum(self, nums: List[int]) -> List[List[int]]:
+        ans = []
+        n = len(nums)
+        nums.sort()
+        for i in range(n):
+            if i > 0 and nums[i] == nums[i - 1]:
+                continue
+            j, k = i + 1, n - 1
+            while j < k:
+                s = nums[i] + nums[j] + nums[k]
+                if s == 0:
+                    ans.append([nums[i], nums[j], nums[k]])
+                    j += 1
+                    while j < k and nums[j] == nums[j - 1]:
+                        j += 1
+                elif s < 0:
+                    j += 1
+                else:
+                    k -= 1
+        return ans
+```
