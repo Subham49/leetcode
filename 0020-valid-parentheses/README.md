@@ -37,3 +37,46 @@
 	<li><code>1 &lt;= s.length &lt;= 10<sup>4</sup></code></li>
 	<li><code>s</code> consists of parentheses only <code>&#39;()[]{}&#39;</code>.</li>
 </ul>
+
+## Java
+```java
+class Solution {
+    public boolean isValid(String s) {
+        ArrayDeque<Character> stack = new ArrayDeque<>();
+        for(char ch : s.toCharArray())
+        {
+            if("({[".indexOf(ch) != -1) stack.push(ch);
+            else{
+                if(stack.isEmpty()) return false;
+                if(
+                    !(stack.peek() == '(' && ch == ')') && 
+                    !(stack.peek() == '[' && ch == ']') && 
+                    !(stack.peek() == '{' && ch == '}')
+                )
+                    return false;
+                stack.pop();
+            }
+        }
+        return stack.isEmpty();
+    }
+}
+```
+
+## Python
+```python
+class Solution:
+    def isValid(self, s: str) -> bool:
+        stack = []
+
+        for i in s:
+            if i in "({[": stack.append(i)
+            else:
+                if not stack: return False
+                if (stack[-1] == '(' and i == ')') or \
+                (stack[-1] == '[' and i == ']') or \
+                (stack[-1] == '{' and i == '}'):
+                    stack.pop()
+                else: return False
+        
+        return not stack
+```
