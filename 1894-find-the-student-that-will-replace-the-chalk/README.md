@@ -46,3 +46,21 @@ Student number 1 does not have enough chalk, so they will have to replace it.
 	<li><code>1 &lt;= chalk[i] &lt;= 10<sup>5</sup></code></li>
 	<li><code>1 &lt;= k &lt;= 10<sup>9</sup></code></li>
 </ul>
+
+## Java
+```java
+class Solution {
+    public int chalkReplacer(int[] chalk, int k) {
+        long sum = Arrays.stream(chalk)
+                         .asLongStream()
+                         .sum();
+        k = (int)(k%sum);
+        for(int i=0; i<chalk.length; i++)
+        {
+            if(chalk[i] > k) return i;
+            k -= chalk[i];
+        }
+        return -1;
+    }
+}
+```
