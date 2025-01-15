@@ -1,4 +1,4 @@
-<h2><a href="https://leetcode.com/problems/minimize-xor/">2429. Minimize XOR</a></h2><h3>Medium</h3><hr><div><p>Given two positive integers <code>num1</code> and <code>num2</code>, find the positive integer <code>x</code> such that:</p>
+<h2><a href="https://leetcode.com/problems/minimize-xor/?envType=daily-question&envId=2025-01-15">2429. Minimize XOR</a></h2><h3>Medium</h3><hr><p>Given two positive integers <code>num1</code> and <code>num2</code>, find the positive integer <code>x</code> such that:</p>
 
 <ul>
 	<li><code>x</code> has the same number of set bits as <code>num2</code>, and</li>
@@ -9,12 +9,13 @@
 
 <p>Return <em>the integer </em><code>x</code>. The test cases are generated such that <code>x</code> is <strong>uniquely determined</strong>.</p>
 
-<p>The number of <strong>set bits</strong> of an integer is the number of <code>1</code>'s in its binary representation.</p>
+<p>The number of <strong>set bits</strong> of an integer is the number of <code>1</code>&#39;s in its binary representation.</p>
 
 <p>&nbsp;</p>
 <p><strong class="example">Example 1:</strong></p>
 
-<pre><strong>Input:</strong> num1 = 3, num2 = 5
+<pre>
+<strong>Input:</strong> num1 = 3, num2 = 5
 <strong>Output:</strong> 3
 <strong>Explanation:</strong>
 The binary representations of num1 and num2 are 0011 and 0101, respectively.
@@ -23,7 +24,8 @@ The integer <strong>3</strong> has the same number of set bits as num2, and the 
 
 <p><strong class="example">Example 2:</strong></p>
 
-<pre><strong>Input:</strong> num1 = 1, num2 = 12
+<pre>
+<strong>Input:</strong> num1 = 1, num2 = 12
 <strong>Output:</strong> 3
 <strong>Explanation:</strong>
 The binary representations of num1 and num2 are 0001 and 1100, respectively.
@@ -36,58 +38,3 @@ The integer <strong>3</strong> has the same number of set bits as num2, and the 
 <ul>
 	<li><code>1 &lt;= num1, num2 &lt;= 10<sup>9</sup></code></li>
 </ul>
-</div>
-
-## Java
-```java
-class Solution {
-    public int minimizeXor(int num1, int num2) {
-        int n = Integer.bitCount(num2);
-        int p = Integer.bitCount(num1);
-        if(n == p) return num1;
-        
-        n -= p;
-        int x = num1;
-        int c = 1;
-        while(n!=0)
-        {
-            if(n>0 && (x&c) == 0) {
-                x |= c;
-                n--;
-            }
-            else if(n<0 && (x&c) != 0) {
-                x ^= c;
-                n++;
-            }
-            c= c << 1;
-        }
-        return x;
-    }
-}
-```
-
-
-## Python
-```python
-class Solution:
-    def minimizeXor(self, num1: int, num2: int) -> int:
-        n = num2.bit_count()
-        p = num1.bit_count()
-        if n == p: return num1
-        
-        n -= p
-        x = num1
-        c = 1
-        while n!=0:
-            if n>0 and (x&c) == 0: 
-                x |= c
-                n -= 1
-                
-            elif n<0 and (x&c) != 0: 
-                x ^= c
-                n += 1
-                
-            c= c << 1
-
-        return x
-```
